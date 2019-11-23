@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   db:
-    container_name: wordpress-training-db
+    container_name: wordpress-db
     image: mysql:5.7
     restart: always
     environment:
@@ -11,35 +11,35 @@ services:
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
     volumes: 
-      - wordpress-training-db:/var/lib/mysql
+      - wordpress-db:/var/lib/mysql
     networks: 
-      - wordpress-training-network
+      - wordpress-network
   web:
-    container_name: wordpress-training-web
+    container_name: wordpress-web
     image: wordpress:latest
     restart: always
     ports:
       - 9000:80
     environment:
-      WORDPRESS_DB_HOST: wordpress-training-db:3306
+      WORDPRESS_DB_HOST: wordpress-db:3306
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
     volumes:
-      - wordpress-training-web-content:/var/www/html/wp-content
+      - wordpress-web-content:/var/www/html/wp-content
     networks: 
-      - wordpress-training-network
+      - wordpress-network
     depends_on:
       - db
 
 volumes:
-  wordpress-training-db:
+  wordpress-db:
     external: false
-    name: wordpress-training-db
-  wordpress-training-web-content:
+    name: wordpress-db
+  wordpress-web-content:
     external: false
-    name: wordpress-training-web-content
+    name: wordpress-web-content
 
 networks:
-  wordpress-training-network:
-    name: wordpress-training-network
+  wordpress-network:
+    name: wordpress-network
