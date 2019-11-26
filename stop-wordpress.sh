@@ -1,1 +1,1 @@
-docker-compose -f wordpress--stack.yaml down
+docker-compose -f wordpress-stack.yaml down
